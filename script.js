@@ -12,7 +12,8 @@ const soundsToExclude = ["da", "ru", "ra", "gu", "ma", "sa", "tu", "ti", "te", "
 let newWord = ""
 let newWords = []
 let syllableCount = 0
-const wordsTable = document.getElementById("words-table")
+const container = document.querySelector(".container")
+let wordsTable = document.getElementById("words-table")
 
 function generateWord(max, min, count) {  
     let stop = false
@@ -69,12 +70,14 @@ function generateWord(max, min, count) {
 }
 
 document.addEventListener("keydown", e => {
-    
     if (e.key === "Enter") {
+        //If the table is already filled, we empty it
+        if (wordsTable.children.length !== 0) {
+
+        }
         //Make sure that number entered are actual numbers, if not give a default value
         if (isNaN(minSyllableField.value || !minSyllableField.value)) {
             minSyllable = 1
-            console.log("No Value")
         } else {
             minSyllable = parseInt(minSyllableField.value, 10)
         }
@@ -90,12 +93,12 @@ document.addEventListener("keydown", e => {
         } else {
             wordCount = parseInt(wordCountField.value, 10)
         }
-
+        //We generate the words
         generateWord(maxSyllable, minSyllable, wordCount)
         
         let counter = 0
         let newRow = document.createElement("tr")
-
+        //We create the table
         newWords.forEach( word => {
             if (counter % 5 === 0) {
                 wordsTable.appendChild(newRow)
