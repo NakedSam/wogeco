@@ -5,10 +5,10 @@ const minSyllableField = document.getElementById("min-syllable-count")
 const maxSyllableField = document.getElementById("max-syllable-count")
 const wordCountField = document.getElementById("word-count")
 const vowels = ["a", "e", "i", "o", "u"]
-const consonants = ["b", "d", "f", "g", "j", "k", "m", "n", "p", "r", "s", "t", "v", "z", "ch", "sh"]
+const consonants = ["b", "d", "f", "g", "j", "k", "m", "n", "p", "r", "s", "t", "v", "z", "ch", "sh", "ts"]
 const soundsToExclude = ["da", "ru", "ra", "gu", "ma", "sa", "tu", "ti", "te", "rim", "bim", "mos", "res",
  "eru", "oru", "bam", "zu", "piu", "pie", "su", "du", "pam", "nue", "foru", "tum", "ne", "ni", "no", "nu",
-"pa", "pi", "pe", "fa", "fi", "fe"]
+"pa", "pi", "pe", "fa", "fi", "fe", "n"]
 let newWord = ""
 let newWords = []
 let syllableCount = 0
