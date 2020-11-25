@@ -123,7 +123,7 @@ function validateStructure(word) {
         }
         */
 
-        //We check if the wordArrayed is 1 of lenght (Meaning less than four characters) or not
+        //We check if the wordArrayed is 1 of length (Meaning less than four characters) or not
 
     }
 
@@ -157,7 +157,10 @@ function validateWord(word) {
 
     structureIsValid = validateStructure(word)
 
-    if (soundIsInvalid || isContainingExcludedLetter || !isEndingWithVowel || !structureIsValid) {
+    if (soundIsInvalid || 
+    isContainingExcludedLetter || 
+    !isEndingWithVowel || 
+    !structureIsValid) {
         isInvalid = true
     }
 
@@ -176,7 +179,6 @@ function countSyllables(word) {
 
     return numberOfSyllables
 }
-
 
 document.addEventListener("keydown", e => {
     if (e.key === "Enter") {

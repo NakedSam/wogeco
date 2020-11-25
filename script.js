@@ -25,41 +25,6 @@ consonants.forEach( consonant => {
     })
 })
 
-/*
-soundsToExclude.forEach( sound => {
-    soundArrayed = sound.split("")
-    soundLength = soundArrayed.length
-    //If there's not already something at index of sound length we create an array for it
-    //This will regroup all the sounds by their length
-    if (!soundsByLength[soundLength]) {
-        soundsByLength[soundLength] = []
-    }
-    soundsByLength[soundLength].push(sound)
-})
-*/
-function validateWordStructure(word) {
-    let isValid = false
-    //THIS WILL ONLY WORK IF THE MAXIMUM SIZE IN CHARACTERS FOR A CONSONANT OR VOWEL IS 2 !!!
-    const wordArrayed = word.split("")
-
-    /*
-    //We validate that the word follows the (V)CVCV... structure by removing
-    for(i = soundsByLength.length -1; i > 0; i--) {
-        soundsByLength[i].forEach( sound => {
-            let wordArrayed = word.split("")
-
-            //We split the words in chunks of letters by the length of the sound
-            for (y = 0; y < wordArrayed.length; y++) {
-                console.log(wordArrayed)
-            }
-    
-        })
-    }
-  */
-    return isValid
-}
-
-
 function generateWord(max, min, count) {  
     let stop = false
 
@@ -86,11 +51,23 @@ function generateWord(max, min, count) {
                             //If the vowel are different, we generate a new number
                             if (newWordArrayed[newWordArrayed.length - 1] === vowels[randomNumber]) {
                                 randomNumber = Math.floor(Math.random() * vowels.length)                  
-                            //Else we stop the loop
+                            //Else we check if it's a diphtong or not (If so, we remove one syllable)
                             } else {
+                                let lastVowel = newWordArrayed[newWordArrayed.length - 1]
+                                
+                                if (lastVowel === "u" || lastVowel === "i") {
+                                    y --
+                                } else if (lastVowel === "a" && vowels[randomNumber] === "i") {
+                                    y --
+                                } else if (lastVowel === "e" && vowels[randomNumber] === "i") {
+                                    y --
+                                } else if (lastVowel === "o" && vowels[randomNumber] === "i") {
+                                    y --
+                                }
+
                                 vowelIsDifferent = true
                             }
-                            
+
                         }
                     }    
                     //We add the vowel to the word and increase 
@@ -113,10 +90,7 @@ function generateWord(max, min, count) {
                     wordIsValid = false
                 }
             })
-
-            const structureIsValid = validateWordStructure(newWord)
             
-
             //If the new word has already been generated we generate a new one else we push the word
             //into the array
             if (!newWords.includes(newWord) && wordIsValid) {
