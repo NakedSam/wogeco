@@ -2,7 +2,8 @@ const wordToValidateField = document.getElementById("word-to-validate")
 const resultDiv = document.querySelector(".result")
 const soundsToExclude = ["da", "ru", "ra", "gu", "ma", "sa", "tu", "ti", "te", "rim", "bim", "mos", "res",
 "eru", "oru", "bam", "zu", "piu", "pie", "su", "du", "pam", "nue", "tum", "ne", "ni", "no", "nu",
-"pa", "pi", "pe", "fa", "fi", "fe", "b", "d", "f", "g", "sh", "ch", "j", "k", "p", "r", "t", "v", "z", "n"]
+"pa", "pi", "pe", "fa", "fi", "fe", "b", "d", "f", "g", "sh", "ch", "j", "k", "p", "r", "t", "v", "z", "n", 
+"sem"]
 let wordToValidate = ""
 const excludedLetters = ["c", "l", "q", "x", "y", "w"]
 let file = ""
@@ -180,6 +181,87 @@ function countSyllables(word) {
     return numberOfSyllables
 }
 
+function convertToIPA(word) {
+    let ipa = ""
+    const wordArrayed = word.split("")
+
+
+    for (let i = 0; i < word.length; i++) {
+        if (wordArrayed[i] === "a") {
+            if (wordArrayed[i + 1] === "i") {
+                ipa = ipa.concat("aj")
+                i ++
+            } else {
+                ipa = ipa.concat("a")
+            }
+        } else if (wordArrayed[i] === "i") {
+            if (wordArrayed[i + 1] === "a") {
+                ipa = ipa.concat("ja")
+                i ++
+            } else if (wordArrayed[i + 1] === "e") {
+                ipa = ipa.concat("je")
+                i ++
+            } else if (wordArrayed[i + 1] === "o") {
+                ipa = ipa.concat("jo")
+                i ++
+            } else if (wordArrayed[i + 1] === "u") {
+                ipa = ipa.concat("ju")
+                i ++
+            } else {
+                ipa = ipa.concat("i")
+            }
+        } else if (wordArrayed[i] === "e") {
+            if (wordArrayed[i + 1] === "i") {
+                ipa = ipa.concat("ɛj")
+                i ++
+            } else {
+                ipa = ipa.concat("e")
+            }
+        } else if (wordArrayed[i] === "o") {
+            if (wordArrayed[i + 1] === "i") {
+                ipa = ipa.concat("oj")
+                i ++
+            } else {
+                ipa = ipa.concat("o")
+            }
+        } else if (wordArrayed[i] === "u") {
+            if (wordArrayed[i + 1] === "a") {
+                ipa = ipa.concat("wa")
+                i ++
+            } else if (wordArrayed[i + 1] === "e") {
+                ipa = ipa.concat("wɛ")
+                i ++
+            } else if (wordArrayed[i + 1] === "i") {
+                ipa = ipa.concat("wi")
+                i ++
+            } else if (wordArrayed[i + 1] === "u") {
+                ipa = ipa.concat("wu")
+                i ++
+            } else {
+                ipa = ipa.concat("u")
+            }
+        } else if (wordArrayed[i] === "j") {
+            ipa.concat("dʒ")
+        } else if (wordArrayed[i] === "s") {
+            if (wordArrayed[i + 1] === "h") {
+                ipa = ipa.concat("ʃ")
+                i ++
+            } else {
+                ipa = ipa.concat("s")
+            }
+        } else if (wordArrayed[i] === "c") {
+            if (wordArrayed[i + 1] === "h") {
+                ipa = ipa.concat("tʃ")
+                i ++
+            }
+        } else {
+            ipa = ipa.concat(wordArrayed[i])
+        }
+    }
+
+    return ipa
+}
+
 document.addEventListener("keydown", e => {
     if (e.key === "Enter") {
         e.preventDefault()
@@ -188,15 +270,16 @@ document.addEventListener("keydown", e => {
 
         wordToValidate = wordToValidateField.value
         isInvalid = validateWord(wordToValidate)
+        const ipa = convertToIPA(wordToValidate)
 
         if (isInvalid) {
             resultDiv.classList.remove("valid")
             resultDiv.classList.add("invalid")
-            resultDiv.innerText = "Invalide"
+            resultDiv.innerText = "Invalide /" + ipa + "/"
         } else {
             resultDiv.classList.remove("invalid")
             resultDiv.classList.add("valid")
-            resultDiv.innerText = "Valide"
+            resultDiv.innerText = "Valide /" + ipa + "/"
         }
     }
 })
