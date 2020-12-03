@@ -8,7 +8,7 @@ const vowels = ["a", "e", "i", "o", "u"]
 const consonants = ["b", "d", "f", "g", "j", "k", "m", "n", "p", "r", "s", "t", "z", "ch", "sh", "ts"]
 const soundsToExclude = ["da", "ru", "ra", "gu", "ma", "sa", "tu", "ti", "te", "rim", "bim", "mos", "res",
  "eru", "oru", "bam", "zu", "piu", "pie", "su", "du", "pam", "nue", "foru", "tum", "ne", "ni", "no", "nu",
-"pa", "pi", "pe", "fa", "fi", "fe", "n"]
+"pa", "pi", "pe", "fa", "fi", "fe", "n", "mi", "muni", "tes"]
 let newWord = ""
 let newWords = []
 let syllableCount = 0

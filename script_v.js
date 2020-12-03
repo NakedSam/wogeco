@@ -3,7 +3,7 @@ const resultDiv = document.querySelector(".result")
 const soundsToExclude = ["da", "ru", "ra", "gu", "ma", "sa", "tu", "ti", "te", "rim", "bim", "mos", "res",
 "eru", "oru", "bam", "zu", "piu", "pie", "su", "du", "pam", "nue", "tum", "ne", "ni", "no", "nu",
 "pa", "pi", "pe", "fa", "fi", "fe", "b", "d", "f", "g", "sh", "ch", "j", "k", "p", "r", "t", "v", "z", "n", 
-"sem"]
+"sem", "mi", "muni", "tes"]
 let wordToValidate = ""
 const excludedLetters = ["c", "l", "q", "x", "y", "w"]
 let file = ""
@@ -241,7 +241,7 @@ function convertToIPA(word) {
                 ipa = ipa.concat("u")
             }
         } else if (wordArrayed[i] === "j") {
-            ipa.concat("dʒ")
+            ipa = ipa.concat("dʒ")
         } else if (wordArrayed[i] === "s") {
             if (wordArrayed[i + 1] === "h") {
                 ipa = ipa.concat("ʃ")
